@@ -20,7 +20,10 @@ function getProjectResources(id) {
 
 function getProjectTasks(id) {
     return db
-    .select('')
+    .select('task.description as task_description', 'task.project_id', 'project.name as project_name', 'project.description as project_description')
+    .from('task')
+    .join('project', 'task.project_id', '=', 'project.id')
+    .where('task.project_id', id);
 };
 
 function addProject(project) {
